@@ -17,7 +17,6 @@ router.post('/', asyncMiddleware(async (req, res) => {
 router.get('/', asyncMiddleware(async (req, res) => {
   const collection = await paginate(db.table('title').where(function(q) {
     if (req.query.search) {
-      console.log(`%${req.query.search}%`)
       q.where('title.title_name', 'ILIKE', `%${req.query.search}%`);
     }
   }), pick(req.query, ['per_page', 'page']));
